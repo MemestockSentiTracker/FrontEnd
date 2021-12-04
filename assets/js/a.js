@@ -1,3 +1,41 @@
+//Your code here
+var date = []; // for seven dates
+for (var i = 0; i < 5; i++){
+	date.push('2021-11-0' + (i + 1));
+}
+
+var boxData4Twitter = [ // for seven days' boxplot Data for Twitter
+    [-1, -0.5, 0, 0.5, 1],
+    [-0.6, -0.5, 0.1, 0.5, 0.6],
+    [-0.2, -0.1, 0.3, 0.5, 0.6],
+    [-0.8, -0.2, 0, 0.5, 1],
+    [-0.7, -0.5, 0, 0.5, 1]
+];
+var boxData4Reddit = [ // for seven days' boxplot Data for Reddit
+    [-0.6, -0.5, 0.1, 0.5, 0.6],
+    [-1, -0.5, 0, 0.5, 1],
+    [-0.2, -0.1, 0.3, 0.5, 0.6],
+    [-1, -0.5, 0, 0.5, 1],
+    [-1, -0.5, 0, 0.5, 1]
+];
+
+var closePrices = [100, 101, 104, 98, 97]; // for seven days' close prices
+
+// outlier datas for twitter and reddit below, data is in format of ['date_index', 'value'] ([x_axis_value, y_axis_value])
+var outliers4Twitter = [ // x, y positions where 0 is the first category
+    [0, -0.9],
+    [4, -0.8],
+    [4, 0.9],
+    [4, 0.95]
+];
+var outliers4Reddit = [ // x, y positions where 0 is the first category
+    [1, -0.9],
+    [2, -0.8],
+    [2, 0.9],
+    [2, 0.95]
+];
+//Your code ends
+
 Highcharts.chart('picture', {
     title: {
         text: 'Price and Emotion score Example'
@@ -8,7 +46,7 @@ Highcharts.chart('picture', {
     },
 
     xAxis: {
-        categories: ['2021-11-01', '2021-11-02', '2021-11-03', '2021-11-04', '2021-11-05'],
+        categories: date,
         labels: {
             style: {
                 color: Highcharts.getOptions().colors[2]
@@ -66,27 +104,15 @@ Highcharts.chart('picture', {
   {
     		type: 'boxplot',
         name: 'Emotions for Twitter',
-        data: [
-            [-1, -0.5, 0, 0.5, 1],
-            [-0.6, -0.5, 0.1, 0.5, 0.6],
-            [-0.2, -0.1, 0.3, 0.5, 0.6],
-            [-0.8, -0.2, 0, 0.5, 1],
-            [-0.7, -0.5, 0, 0.5, 1]
-        ],
+        data: boxData4Twitter,
         tooltip: {
             headerFormat: '<em>Date: {point.key}</em><br/>'
         }
     }, 
     {
     		type: 'boxplot',
-        name: 'Emotions for Raddit',
-        data: [
-            [-0.6, -0.5, 0.1, 0.5, 0.6],
-            [-1, -0.5, 0, 0.5, 1],
-            [-0.2, -0.1, 0.3, 0.5, 0.6],
-            [-1, -0.5, 0, 0.5, 1],
-            [-1, -0.5, 0, 0.5, 1]
-        ],
+        name: 'Emotions for Reddit',
+        data: boxData4Reddit,
         tooltip: {
             headerFormat: '<em>Date: {point.key}</em><br/>'
         }
@@ -97,12 +123,7 @@ Highcharts.chart('picture', {
         name: 'Twitter Outliers',
         color: Highcharts.getOptions().colors[0],
         type: 'scatter',
-        data: [ // x, y positions where 0 is the first category
-            [0, -0.9],
-            [4, -0.8],
-            [4, 0.9],
-            [4, 0.95]
-        ],
+        data: outliers4Twitter,
         marker: {
             fillColor: 'white',
             lineWidth: 1,
@@ -114,15 +135,10 @@ Highcharts.chart('picture', {
         }
     },
     {
-        name: 'Raddit Outliers',
+        name: 'Reddit Outliers',
         color: Highcharts.getOptions().colors[0],
         type: 'scatter',
-        data: [ // x, y positions where 0 is the first category
-            [1, -0.9],
-            [2, -0.8],
-            [2, 0.9],
-            [2, 0.95]
-        ],
+        data: outliers4Reddit,
         marker: {
             fillColor: 'white',
             lineWidth: 1,
@@ -136,7 +152,7 @@ Highcharts.chart('picture', {
     {
     type: 'spline',
     name: 'Price',
-    data: [100, 101, 104, 98, 97],
+    data: closePrices,
     yAxis: 1,
     lineColor: Highcharts.getOptions().colors[3],
     marker: {
