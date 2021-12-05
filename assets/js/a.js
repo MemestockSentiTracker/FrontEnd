@@ -1,39 +1,49 @@
 //Your code here
-var date = []; // for seven dates
-for (var i = 0; i < 5; i++){
-	date.push('2021-11-0' + (i + 1));
-}
+var date = [
+    '2021-11-29', 
+    '2021-11-30', 
+    '2021-12-01', 
+    '2021-12-02', 
+    '2021-12-03', 
+]; 
 
-var boxData4Twitter = [ // for seven days' boxplot Data for Twitter
-    [-1, -0.5, 0, 0.5, 1],
-    [-0.6, -0.5, 0.1, 0.5, 0.6],
-    [-0.2, -0.1, 0.3, 0.5, 0.6],
-    [-0.8, -0.2, 0, 0.5, 1],
-    [-0.7, -0.5, 0, 0.5, 1]
+// for seven dates
+// for (var i = 0; i < 5; i++){
+// 	date.push('2021-11-0' + (i + 1));
+// }
+
+var boxData4Twitter = [ // for 5 days' boxplot Data for Twitter
+    [-0.8, -0.7, 0, 0.2, 0.3],
+    [-0.8, -0.5, 0, 0.2, 0.3],
+    [-0.6, -0.5, 0.1, 0.2, 0.4],
+    [-0.2, -0.1, 0.3, 0.3, 0.5],
+    [-0.7, -0.5, 0, 0.2, 0.4]
 ];
-var boxData4Reddit = [ // for seven days' boxplot Data for Reddit
-    [-0.6, -0.5, 0.1, 0.5, 0.6],
-    [-1, -0.5, 0, 0.5, 1],
-    [-0.2, -0.1, 0.3, 0.5, 0.6],
-    [-1, -0.5, 0, 0.5, 1],
-    [-1, -0.5, 0, 0.5, 1]
+var boxData4Reddit = [ // for 5 days' boxplot Data for Reddit
+    [-0.8, -0.5, 0, 0.2, 0.3],
+    [-0.6, -0.5, 0, 0.1, 0.2],
+    [-0.2, -0.1, 0.2, 0.3, 0.4],
+    [-0.4, -0.3, 0, 0.5, 1],
+    [-0.6, -0.1, 0.3, 0.3, 0.5],
 ];
 
-var closePrices = [100, 101, 104, 98, 97]; // for seven days' close prices
+var closePrices = [36.84, 33.94, 28.57, 30.28, 29.01]; // for seven days' close prices
 
 // outlier datas for twitter and reddit below, data is in format of ['date_index', 'value'] ([x_axis_value, y_axis_value])
 var outliers4Twitter = [ // x, y positions where 0 is the first category
-    [0, -0.9],
-    [4, -0.8],
-    [4, 0.9],
-    [4, 0.95]
+    // [0, -0.9],
+    // [4, -0.8],
+    // [4, 0.9],
+    // [4, 0.95]
 ];
 var outliers4Reddit = [ // x, y positions where 0 is the first category
-    [1, -0.9],
-    [2, -0.8],
-    [2, 0.9],
-    [2, 0.95]
+    // [1, -0.9],
+    // [2, -0.8],
+    // [2, 0.9],
+    // [2, 0.95]
 ];
+
+
 //Your code ends
 
 Highcharts.chart('picture', {
