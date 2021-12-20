@@ -67,10 +67,12 @@ var boxData4Reddit = [ // for 5 days' boxplot Data for Reddit
 ];
 
 let sentiments = res.sentiments;
+
+
 for(var i = 0; i < 5; i++){
     if(sentiments[i].length == 2){
-        boxData4Reddit[i] = sentiments[i][0];
-        boxData4Twitter[i] = sentiments[i][1];
+        boxData4Reddit[i] = sentiments[i][0].scores;
+        boxData4Twitter[i] = sentiments[i][1].scores;
     }
 }
 
@@ -236,14 +238,22 @@ const fetchData2 = fetchOHLC(url + '/' + stockName[curStockNum]);
     fetchData2.then(res=>{
         // console.log(res)
         let data = res.data["word_cloud"][curStockNum]["freq"]
-        return {data}
+        let comments = res.data.sample_comments[curStockNum].sample_comments;
+        console.log(comments);
+        return {data, comments}
     }).then( res =>{
         var chartdata = [];
         for (let i = 0; i < res.data.length; i++){
             chartdata.push({name: res.data[i][0], weight: res.data[i][1]});
         }
-        console.log('here2');
-        console.log(chartdata);
+        // console.log('here2');
+        // console.log(chartdata);
+
+        let newComments = res.comments;
+        for(var i = 0; i < 4; i++){
+            document.getElementById("comment_date" + i).innerText = date[4];
+            document.getElementById("comment" + i).innerText = newComments[i];
+        }
 
         Highcharts.chart('chart2', {
             accessibility: {
