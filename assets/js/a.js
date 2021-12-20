@@ -247,11 +247,15 @@ const fetchData2 = fetchOHLC(url + '/' + stockName[curStockNum]);
             chartdata.push({name: res.data[i][0], weight: res.data[i][1]});
         }
         // console.log('here2');
-        // console.log(chartdata);
+        console.log(chartdata);
 
         let newComments = res.comments;
-        for(var i = 0; i < 4; i++){
-            document.getElementById("comment_date" + i).innerText = date[4];
+        for(var i = 0; i < 8; i++){
+            if(i < 4){
+                document.getElementById("comment_date" + i).innerText = date[4];
+            } else {
+                document.getElementById("comment_date" + i).innerText = date[3];
+            }
             document.getElementById("comment" + i).innerText = newComments[i];
         }
 
