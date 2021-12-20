@@ -231,4 +231,39 @@ Highcharts.chart('picture', {
 
 });
 
-})      //The end of "then" function
+//pic2
+const fetchData2 = fetchOHLC(url + '/' + stockName[curStockNum]);
+    fetchData2.then(res=>{
+        // console.log(res)
+        let data = res.data["word_cloud"][curStockNum]["freq"]
+        return {data}
+    }).then( res =>{
+        var chartdata = [];
+        for (let i = 0; i < res.data.length; i++){
+            chartdata.push({name: res.data[i][0], weight: res.data[i][1]});
+        }
+        console.log('here2');
+        console.log(chartdata);
+
+        Highcharts.chart('chart2', {
+            accessibility: {
+                screenReaderSection: {
+                    beforeChartFormat: '<h5>{chartTitle}</h5>' +
+                        '<div>{chartSubtitle}</div>' +
+                        '<div>{chartLongdesc}</div>' +
+                        '<div>{viewTableButton}</div>'
+                }
+            },
+            series: [{
+                type: 'wordcloud',
+                data: chartdata,
+                name: 'Occurrences'
+            }],
+            title: {
+                text: 'Wordcloud of comments'
+            }
+        });
+
+});
+})//The end of "then" function
+
