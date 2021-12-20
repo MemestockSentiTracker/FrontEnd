@@ -28,7 +28,7 @@
 	<link rel="stylesheet" href="assets/css/header-colors.css" />
 	<!-- Self Added -->
 	<link href="assets/css/a.css" rel="stylesheet" />
-	<title>Rukada - Responsive Bootstrap 5 Admin Template</title>
+	<title>MemeStock</title>
 </head>
 
 <body>
@@ -67,7 +67,7 @@
 		</div>
 		<!--end sidebar wrapper -->
 		<!--start header -->
-		<header>
+		<!--<header>
 			<div class="topbar d-flex align-items-center">
 				<nav class="navbar navbar-expand">
 					<div class="mobile-toggle-menu"><i class='bx bx-menu'></i>
@@ -418,7 +418,7 @@
 					</div>
 				</nav>
 			</div>
-		</header>
+		</header> -->
 		<!--end header -->
 		<!--start page wrapper -->
 		<div class="page-wrapper">
@@ -446,13 +446,13 @@
 								<div class="d-flex align-items-center">
 									<div>
 										<p class="mb-0">AMC</p>
-										<h5 class="mb-0">29.01</h5>
+										<h5 class="mb-0" id='stockPrice1'>29.01</h5>
 									</div>
 									<div class="dropdown ms-auto">
 										<div class="dropdown-toggle dropdown-toggle-nocaret cursor-pointer" data-bs-toggle="dropdown">	<i class='bx bx-dots-horizontal-rounded font-22'></i>
 										</div>
 										<ul class="dropdown-menu">
-											<li><a class="dropdown-item" href="details.html">Details</a>
+											<li><a class="dropdown-item" onclick="jump2Detail(0)">Details</a>
 											</li>
 											<li><a class="dropdown-item" href="javascript:;">Another action</a>
 											</li>
@@ -474,13 +474,13 @@
 								<div class="d-flex align-items-center">
 									<div>
 										<p class="mb-0">TSLA</p>
-										<h5 class="mb-0">1014.97</h5>
+										<h5 class="mb-0" id='stockPrice2'>1014.97</h5>
 									</div>
 									<div class="dropdown ms-auto">
 										<div class="dropdown-toggle dropdown-toggle-nocaret cursor-pointer" data-bs-toggle="dropdown">	<i class='bx bx-dots-horizontal-rounded font-22'></i>
 										</div>
 										<ul class="dropdown-menu">
-											<li><a class="dropdown-item" href="details.html">Details</a>
+											<li><a class="dropdown-item" onclick="jump2Detail(1)">Details</a>
 											</li>
 											<li><a class="dropdown-item" href="javascript:;">Another action</a>
 											</li>
@@ -502,13 +502,13 @@
 								<div class="d-flex align-items-center">
 									<div>
 										<p class="mb-0">TLRY</p>
-										<h5 class="mb-0">8.95</h5>
+										<h5 class="mb-0" id='stockPrice3'>8.95</h5>
 									</div>
 									<div class="dropdown ms-auto">
 										<div class="dropdown-toggle dropdown-toggle-nocaret cursor-pointer" data-bs-toggle="dropdown">	<i class='bx bx-dots-horizontal-rounded font-22'></i>
 										</div>
 										<ul class="dropdown-menu">
-											<li><a class="dropdown-item" href="details.html">Details</a>
+											<li><a class="dropdown-item" onclick="jump2Detail(2)">Details</a>
 											</li>
 											<li><a class="dropdown-item" href="javascript:;">Another action</a>
 											</li>
@@ -530,13 +530,13 @@
 								<div class="d-flex align-items-center">
 									<div>
 										<p class="mb-0">GME</p>
-										<h5 class="mb-0">172.39</h5>
+										<h5 class="mb-0" id='stockPrice4'>172.39</h5>
 									</div>
 									<div class="dropdown ms-auto">
 										<div class="dropdown-toggle dropdown-toggle-nocaret cursor-pointer" data-bs-toggle="dropdown">	<i class='bx bx-dots-horizontal-rounded font-22'></i>
 										</div>
 										<ul class="dropdown-menu">
-											<li><a class="dropdown-item" href="details.html">Details</a>
+											<li><a class="dropdown-item" onclick="jump2Detail(3)">Details</a>
 											</li>
 											<li><a class="dropdown-item" href="javascript:;">Another action</a>
 											</li>
@@ -556,6 +556,7 @@
 				<!--end row-->
 				
 				<div class="row">
+					<!--Start of Box Table-->
 					<div class="col-12 col-lg-8 col-xl-8 d-flex">
 					   <div class="card radius-10 w-100">
 						<div class="card-body">
@@ -577,9 +578,54 @@
 								<div id = 'picture'></div>
 							</figure>
 						</div>
-						
 					   </div>
 					</div>
+					<!--End of Box Table-->
+					
+					<!--Start of Another Table-->
+					<div class="col-12 col-lg-4 col-xl-4 d-flex">
+						<div class="card radius-10 overflow-hidden w-100">
+						   <div class="card-body">
+							 <div class="d-flex align-items-center">
+								 <div>
+									 <h6 class="mb-0">Vocabulary Cloud</h6>
+								 </div>
+								 <div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>
+								 </div>
+							 </div>
+							 <div class="chart-container-2 my-3">
+							   <canvas id="chart2"></canvas>
+							  </div>
+						   </div>
+						   <div class="table-responsive">
+							 <table class="table align-items-center mb-0">
+							   <tbody>
+								 <tr>
+								   <td><i class="bx bxs-circle me-2" style="color: #14abef"></i> Direct</td>
+								   <td>$5856</td>
+								   <td>+55%</td>
+								 </tr>
+								 <tr>
+								   <td><i class="bx bxs-circle me-2" style="color: #02ba5a"></i>Affiliate</td>
+								   <td>$2602</td>
+								   <td>+25%</td>
+								 </tr>
+								 <tr>
+								   <td><i class="bx bxs-circle me-2" style="color: #d13adf"></i>E-mail</td>
+								   <td>$1802</td>
+								   <td>+15%</td>
+								 </tr>
+								 <tr>
+								   <td><i class="bx bxs-circle me-2" style="color: #fba540"></i>Other</td>
+								   <td>$1105</td>
+								   <td>+5%</td>
+								 </tr>
+							   </tbody>
+							 </table>
+						   </div>
+						 </div>
+					 </div>
+					<!--End of Another Table-->
 				   </div><!--End Row-->
 
 					<div class="row">

@@ -1,17 +1,56 @@
+// This file control the data source of details.html
+
 //Your code here
-var date = [
-    '2021-11-29', 
-    '2021-11-30', 
-    '2021-12-01', 
-    '2021-12-02', 
-    '2021-12-03', 
-]; 
 
-// for seven dates
-// for (var i = 0; i < 5; i++){
-// 	date.push('2021-11-0' + (i + 1));
+"use strict"
+// const Http = new XMLHttpRequest();
+// const url='https://s1ll6i814a.execute-api.us-east-1.amazonaws.com/dev/memestocks';
+// Http.open("GET", url);
+// Http.send();
+
+// async function fetchOHLC(yUrl) {
+// 	try {
+// 	  const r = await ( await fetch(yUrl) ).json();
+// 	  return {
+// 		  data: r.body
+// 	  };
+// 	} catch(e) { console.log(e); }
 // }
+// const fetchData = fetchOHLC(url);
 
+
+function getQueryString(name) {
+    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        return unescape(r[2]);
+    }
+    return null;
+}
+
+
+
+var curStockNum = getQueryString("stock");
+
+
+fetchData.then(res=>{
+	let data = res.data.data
+	let stock_names = data.stock_names
+    let dates = data.dates
+    console.log(data)
+	console.log(stock_names)
+    console.log(dates)
+	var prices = [];
+	let sentiments = data.records[curStockNum].sentiments;
+	for (var i = 0; i < stock_names.length; i++){
+		prices.push(data.records[i].price_data);
+		// sentiments.push(data.records[i].sentiments);
+	}
+	return {stock_names, dates, prices, sentiments}
+}).then( res =>{
+
+let date = res.dates; 
+// console.log(date)
 var boxData4Twitter = [ // for 5 days' boxplot Data for Twitter
     [-0.8, -0.7, 0, 0.2, 0.3],
     [-0.8, -0.5, 0, 0.2, 0.3],
@@ -27,7 +66,16 @@ var boxData4Reddit = [ // for 5 days' boxplot Data for Reddit
     [-0.6, -0.1, 0.3, 0.3, 0.5],
 ];
 
-var closePrices = [36.84, 33.94, 28.57, 30.28, 29.01]; // for seven days' close prices
+let sentiments = res.sentiments;
+for(var i = 0; i < 5; i++){
+    if(sentiments[i].length == 2){
+        boxData4Reddit[i] = sentiments[i][0];
+        boxData4Twitter[i] = sentiments[i][1];
+    }
+}
+
+
+var closePrices = res.prices[curStockNum];  //[36.84, 33.94, 28.57, 30.28, 29.01]; // for seven days' close prices
 
 // outlier datas for twitter and reddit below, data is in format of ['date_index', 'value'] ([x_axis_value, y_axis_value])
 var outliers4Twitter = [ // x, y positions where 0 is the first category
@@ -43,12 +91,21 @@ var outliers4Reddit = [ // x, y positions where 0 is the first category
     // [2, 0.95]
 ];
 
+// Change the number of 4 charts on details.html
+let prices = res.prices;
+for (var i = 1; i < 5; i++){
+    if (document.getElementById("stockPrice" + i) != null){
+	    document.getElementById("stockPrice" + i).innerText = prices[i-1][4];
+    }
+}
 
 //Your code ends
 
+let stockName = res.stock_names[curStockNum];
+
 Highcharts.chart('picture', {
     title: {
-        text: 'Price and Emotion score Example'
+        text: 'Price and Emotion score for ' + stockName
     },
 
     legend: {
@@ -173,3 +230,5 @@ Highcharts.chart('picture', {
   }]
 
 });
+
+})      //The end of "then" function
